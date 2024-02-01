@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { Route, Routes, useNavigate } from 'react-router';
+import './App.css';
+import Shows from './Components/Shows';
+import { useEffect, useState } from 'react';
+import Show from './Components/Show';
+
+const App = () => {
+  const navigate = useNavigate()
+  const [show,setShow] = useState({})
+
+  useEffect(()=>{
+
+  },[show])
+
+  const clickHandler = (shw)=>{
+      setShow(pState=>{
+        return {...shw}
+      })
+      console.log(show);
+      navigate("/show")
+
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Routes>
+          <Route path = "/" element={<Shows clickHandler={clickHandler}/>}/>
+          <Route path = "/show" element={<Show show={show}/>}/>
+        </Routes>
+        
     </div>
   );
 }
